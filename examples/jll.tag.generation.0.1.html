@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>jLL Script Deferrer v0.1: Demo</title>
+    <script src="../jll.0.1.js"></script>
+    <script type="text/javascript">
+        jLL.enableDebug();
+        
+        var pass = true;
+        var tag = jLL.buildScriptTag('../../jloader/js/jquery/jquery-1.6.1.js');
+        tag.addEvent(function(){console.log('Success event #1');});
+        tag.addEvent(function(){console.log('Success event #1');});
+        tag.addCheck(
+            function(){return pass;},     
+            function() {console.log('Fail event #1');}
+        );
+        tag.addCheck(
+            function(){return pass;},     
+            function() {console.log('Fail event #2');}
+        );
+        
+        tag.render();
+
+    </script>
+</head>
+<body>
+</body>
+</html>
