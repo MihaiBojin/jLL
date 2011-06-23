@@ -6,12 +6,12 @@
     <script type="text/javascript">
         jLL.enableDebug();
         
-        var pass = true;
+        var pass = false;
         var tag = jLL.buildScriptTag('../../jloader/js/jquery/jquery-1.6.1.js');
         tag.addEvent(function(){console.log('Success event #1');});
         tag.addEvent(function(){console.log('Success event #1');});
         tag.addCheck(
-            function(){return pass;},     
+            function(){return pass;},
             function() {console.log('Fail event #1');}
         );
         tag.addCheck(

@@ -3,24 +3,59 @@
 <head>
     <title>jLL Script Deferrer v0.1: Demo</title>
     <script src="../jll.0.1.js"></script>
+    
     <script type="text/javascript">
-        var lscripts = ["/../../jloader/js/jquery/jquery-1.6.1.js", 
-         "../../jloader/js/jquery/ui/jquery.ui.core.js",
-         "../../jloader/js/jquery/external/jquery.bgiframe-2.1.2.js",
-         "../../jloader/js/jquery/ui/jquery.ui.core.js",
-         "../../jloader/js/jquery/external/jquery.cookie.js",
-         "../../jloader/js/jquery/ui/jquery.ui.datepicker.js"
-        ]
+        var mockOnloadEvent = function() {
+            jLL.log("Loaded a script");
+        }
         
-        jLL.enableDebug();
-        jLL.log('e');
-        var def = jLL.deferrer.push(lscripts)
-        def.push("/../../jloader/js/jquery/jquery-1.6.1.js");
-        def.runOnLoad();
+        var mockCheckEventTrue = function() {
+            jLL.log("Mocking check and returning true");
+            return true;
+        }
+    
+        var mockCheckEventFalse = function() {
+            jLL.log("Mocking check and returning false");
+            return false;
+        }
         
-//        var deferrer = new ScriptDeferrer();
-//        deferrer.push(lscripts);
-//        deferrer.runOnLoad();
+        var mockCheckTrigger = function() {
+            jLL.log("A check has failed!");
+        }
+        
+        var checkForJQuery = function () {
+            if ("undefined" !== typeof jQuery) {
+                //console.log("JQuery is already loaded. Skipping file!");
+                return false;
+            }
+            return true;
+        }
+    
+        var scriptqueue = [
+            ["/../../jloader/js/jquery/jquery-1.6.1.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger],
+            ["/../../jloader/js/jquery/jquery-1.6.1.js", mockOnloadEvent, checkForJQuery, mockCheckTrigger],
+            ["../../jloader/js/jquery/ui/jquery.ui.core.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger],
+            ["../../jloader/js/jquery/external/jquery.bgiframe-2.1.2.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger],
+            ["../../jloader/js/jquery/external/jquery.cookie.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger],
+            ["../../jloader/js/jquery/ui/jquery.ui.datepicker.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger],
+        ];
+        
+        //jLL.enableDebug();
+        var deferrer = jLL.staticDeferrer();
+        deferrer.push(scriptqueue);
+		
+        deferrer.push(scriptqueue[0][0], function(){
+            alert("JQuery should not be loaded again!"); //event
+        }, checkForJQuery);
+        deferrer.runOnLoad();
+
+        // setTimeout(function(){
+        //     alert(document.readyState);
+        //     deferrer.push([["../tests/js/rawjs01.js", mockOnloadEvent, mockCheckEventTrue, mockCheckTrigger]]);
+        //     deferrer.run();
+        // }, 2000);
+
+        
     </script>
 </head>
 <body>
