@@ -1,17 +1,32 @@
 jLL: Javascript Library Loader
 ==============================
 
-### a JavaScript toolkit that helps you load different libraries, plugins etc taking care of dependencies
+jLL: Javascript Library Loader v0.1
+https://github.com/MihaiBojin/jLL
 
-It has the following components:
+Mihai Bojin <mihai.bojin@gmail.com>
+Copyright 2011, Mihai Bojin
 
-- *ScriptDeferrer*: can load a bunch of javascript files in order; this is different than writing
-html script tags, because the elements are dynamically inserted into the DOM and the first one is
-loaded asynchronously which means that it can be attached to an onLoad event and not block DOM rendering
+Licensed under the MIT license.
+
+The Javascript Library Loader is a toolkit that allows asynchronous loading of 
+different Javascript libraries, plugins etc while defining an easy mechanism to
+handle inter-library dependencies.
+
+It implements two inner clases that get exposed by public methods:
+- ScriptTag: component that injects and loads scripts asynchronously into web pages; 
+			 can trigger multiple onload events; 
+			 can check for conditions and run alternative logic when that happens
+- ScriptDeferrer: component that can load a number of scripts in order,
+				  one after another (useful to handle script dependencies)
+
+The component also has a debugging mode which output logs to the console object
+available in most modern browsers.
+Logging is disabled by default, but can be enabled by running the enableDebug() method.
 
 * * *
 
-jLL is licensed under the [MIT licenses]
+jLL is licensed under the [MIT license]
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
