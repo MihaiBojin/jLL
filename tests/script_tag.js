@@ -99,7 +99,7 @@ test("Load 3 scripts in order on DOMready", 2, function() {
 	}
 	stop();
 	attachOnReady(function(){
-		setTimeout(endEvent, 150);
+		setTimeout(endEvent, 200);
 	});
 	
 	deferrer.push('mock_load/mock_object.js');
