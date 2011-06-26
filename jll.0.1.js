@@ -301,7 +301,7 @@
 		 */
 		this.runOnLoad = function() {
 			// if DOMready event has already occurred, start loading the queue
-			if ( document.readyState === "complete" ) {
+			if ("complete" === document.readyState) {
 				this.run();
 				return ;
 			}

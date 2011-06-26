@@ -1,0 +1,3 @@
+var mockObject = {
+	mockQueue: [],
+};
