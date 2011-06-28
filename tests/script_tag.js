@@ -44,6 +44,18 @@ test("Run trigger on check fail; script not loaded", 2, function() {
 	script.render();
 });
 
+test("Define script but do not load in page", 1, function() {
+	var script = jLL.buildScriptTag('mock_load/mock_object.js');
+	stop();
+	script.addEvent(function() {
+		ok(false, "This should not run");
+	});
+	setTimeout(function () {
+		ok(true, "Only this assertion will run");
+		start();
+	}, 200);
+});
+
 
 module("ScriptDeferrer");
 

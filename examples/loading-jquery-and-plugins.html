@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>jLL v0.1 Test Suite</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+	<script type="text/javascript" src="../jll-0.1.js"></script>
+</head>
+<body>
+    <h1>Loading jQuery in non blocking mode and using it to inject a few DIVs into DOM...</h1>
+    <div class="row" id="row1">
+        <h2>A box will be added after jQuery is loaded</h2>
+    </div>
+    
+    <h1>Loading jQuery UI Core and jQuery UI dialog on DOMready in order</h1>
+    <div class="row" id="row2">
+        <h2>Boxes will appear after DOMready</h2>
+    </div>
+    
+    <h1>Loading jQuery.cookie</h1>
+    <div class="row" id="row3">
+        <h2>onLoad</h2>
+    </div>
+    
+    <h1>Loading jQuery.metadata</h1>
+    <div class="row" id="row4">
+        <h2>onLoad</h2>
+    </div>
+    
+	<script>
+	var tag, deferrer, deferrer2, deferrer3;
+	
+	tag = jLL.buildScriptTag('js/jquery-1.6.1.js');
+	tag.addEvent(function () {
+	    var id = '#row1';
+	    $(id).append('<div class="box color1">JQuery</div>');
+	});
+	tag.render();
+
+	deferrer = jLL.staticDeferrer();
+	deferrer.push('js/jquery.ui.core.js', function () {
+	    var id = '#row2';
+	    $(id).append('<div class="box color2">UI core</div>');
+	});
+	deferrer.push('js/jquery.ui.dialog.js', function () {
+	    var id = '#row2';
+	    $(id).append('<div class="box color3">UI dialog</div>');
+	});
+	deferrer.runOnLoad();
+	
+	deferrer2 = jLL.buildScriptDeferrer();
+	deferrer2.push('js/jquery.cookie.js', function () {
+	    var id = '#row3';
+	    $(id).append('<div class="box color4">jQ Cookie</div>');
+	});
+	deferrer2.runOnLoad();
+	
+	deferrer3 = jLL.buildScriptDeferrer();
+	deferrer3.push('js/jquery.metadata.js', function () {
+	    var id = '#row4';
+	    $(id).append('<div class="box color1">jQ Metadata</div>');
+	});
+	deferrer3.runOnLoad();
+	
+	</script>
+</body>
+</html>
