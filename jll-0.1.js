@@ -41,8 +41,8 @@
 
 	
 	/**
-	 *	@class creates DOM script tags, allows registration of load events and allows checking for user specified conditions before executing the code
-	 *	@private
+	 *  @class creates DOM script tags, allows registration of load events and allows checking for user specified conditions before executing the code
+	 *  @private
 	 *  @constructor
 	 */
 	ScriptTag = function (src) {
