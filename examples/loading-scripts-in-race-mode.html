@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>jLL v0.1 Test Suite</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+	<script type="text/javascript" src="../jll-0.1.js"></script>
+</head>
+<body>
+    <h1>Loading jQuery</h1>
+    <div class="row" id="row1">
+        <h2>One box per script</h2>
+    </div>
+    
+    <h1>Loading scripts after jQuery:</h1>
+    <div class="row" id="row2">
+        <h2>One box per script</h2>
+    </div>
+        
+	<script>
+	var deferrer, deferrer2, deferrer3, deferrer4;
+		
+	deferrer = jLL.staticDeferrer();
+	deferrer.push('js/jquery.ui.core.js', function () {
+	    var id = '#row2';
+	    $(id).append('<div class="box color2">UI core</div>');
+	});
+	deferrer.push('js/jquery.metadata.js', function () {
+	    var id = '#row2';
+	    $(id).append('<div class="box color3">JQuery metadata</div>');
+	});
+	deferrer.push('js/jquery.cookie.js', function () {
+	    var id = '#row2';
+	    $(id).append('<div class="box color4">JQuery Cookie</div>');
+	});
+	
+	deferrer2 = jLL.buildScriptDeferrer();
+	deferrer2.push('js/jquery-1.6.1.js', function () {
+	    var id = '#row1';
+	    $(id).append('<div class="box color1">jQuery</div>');
+    	deferrer.runOnLoad(true); // run script queue in racing mode
+	});
+	deferrer2.runOnLoad();
+		
+	</script>
+</body>
+</html>

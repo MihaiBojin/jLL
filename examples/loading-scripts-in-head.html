@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>jLL v0.1 Test Suite</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+	<script type="text/javascript" src="js/jquery-1.6.1.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="js/jquery.metadata.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+</head>
+<body>
+    <h1>Loading jQuery</h1>
+    <div class="row" id="row1">
+        <h2>One box per script</h2>
+    </div>
+    
+    <h1>Loading scripts after jQuery:</h1>
+    <div class="row" id="row2">
+        <h2>One box per script</h2>
+    </div>
+	<script type="text/javascript">
+    var id = '#row1';
+    $(id).append('<div class="box color1">jQuery</div>');
+    var id = '#row2';
+    $(id).append('<div class="box color2">UI core</div>');
+    var id = '#row2';
+    $(id).append('<div class="box color3">JQuery metadata</div>');
+    var id = '#row2';
+    $(id).append('<div class="box color4">JQuery Cookie</div>');
+	</script>
+</body>
+</html>

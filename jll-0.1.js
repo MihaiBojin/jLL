@@ -221,7 +221,8 @@
 		 */
 		var queue,
 			running,
-			loadFromQueue;
+			loadFromQueue,
+			raceFromQueue;
 
 		/**
 		 *  Queue of scripts to load
@@ -334,6 +335,21 @@
 				nextInQueue();
 			}
 		};
+		
+		/**
+		 *  Fire off all scripts at once
+		 */
+		raceFromQueue = function () {
+			var tScript;
+			
+			running = 1;
+			while ("undefined" !== typeof (tScript = queue.shift())) {
+				tScript.render();
+			}
+			running = 0;
+			
+			jLL.log("ALl scripts loaded in race mode!");
+		};
 
 		/**
 		 *	Starts loading the scripts in the queue (only if queue isn't already being loaded)
@@ -341,7 +357,7 @@
 		 *	@returns {boolean} False if another process was loading the queue, or true if loading was started
 		 *	@public
 		 */
-		this.run = function () {
+		this.run = function (race) {
 			// if queue is already being loaded, skip 
 			if (1 === running) {
 				jLL.log("Queue is already loading!");
@@ -350,7 +366,11 @@
 			
 			// starts loading scripts from the queue
 			jLL.log("Loading queue...");
-			loadFromQueue();
+			if ("undefined" === typeof race) {
+				loadFromQueue();
+			} else {
+				raceFromQueue();
+			}
 			return true;
 		};
 
@@ -358,18 +378,23 @@
 		 *	Attaches the run method to the DOMload event, or executes it directly if DOMready event has already occurred
 		 *	@public
 		 */
-		this.runOnLoad = function () {
+		this.runOnLoad = function (race) {
+			var that = this,
+				runHandler = function () {
+					that.run(race);
+				};
+			
 			// if DOMready event has already occurred, start loading the queue
 			if ("complete" === document.readyState) {
-				this.run();
+				runHandler();
 				return;
 			}
 			
 			// attach this.run to DOMready event
 			if (window.attachEvent) {
-				window.attachEvent('onload', this.run);
+				window.attachEvent('onload', runHandler);
 			} else {
-				window.addEventListener('load', this.run, false);
+				window.addEventListener('load', runHandler, false);
 			}
 		};
 	};
