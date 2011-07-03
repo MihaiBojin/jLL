@@ -209,7 +209,7 @@
 	};
 	
 	/**
-	 *	@class Defines a script loading queue that can load and execute scripts in order; useful when scripts depend on each other and need to be executed in a certain order
+	 *	@class Defines a script loading queue that can load and execute scripts in order or in racing mode; useful when scripts depend on each other and need to be executed in a certain order or when a bunch of scripts need to be loaded in parallel
 	 *	@requires ScriptTag
 	 *	@private
 	 *  @constructor
