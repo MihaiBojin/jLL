@@ -276,7 +276,7 @@
 							if ("undefined" !== typeof src[i][1]) {
 						        tag.addEvent(src[i][1]);
 							}
-
+							
 							// if check closure was passed, define it and it's trigger
 							if ("undefined" !== typeof src[i][2]) {
 						        tag.addCheck(src[i][2], src[i][3]);
@@ -291,8 +291,15 @@
 			// push one script to queue
 			} else if ("string" === typeof src) {
 		        tag = jLL.buildScriptTag(src);
-		        tag.addCheck(check, checkTrigger);
-		        tag.addEvent(onload);
+				
+				if ("undefined" !== typeof check) {
+		            tag.addCheck(check, checkTrigger);
+				}
+				
+				if ("undefined" !== typeof onload) {
+		            tag.addEvent(onload);
+				}
+				
 				queue.push(tag);
 			
 			// handle wrong arguments

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>A simple webpage without jLL</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+	
+	<!-- Load jLL as the single script to be loaded in blocking mode -->
+	<script type="text/javascript" src="../../jll-0.1.js"></script>
+</head>
+<body>
+	<div id="wrapper" class="container_12 clearfix">
+
+		<!-- Text Logo -->
+		<h1 id="logo" class="grid_4">Aurelius</h1>
+		
+		<!-- Navigation Menu -->
+		<ul id="navigation" class="grid_8">
+			<li><a href="#"><span class="meta">Get in touch</span><br />Contact Us</a></li>
+			<li><a href="#"><span class="meta">Latest news</span><br />Blog</a></li>
+			<li><a href="#"><span class="meta">Our latest work</span><br />Portfolio</a></li>
+				
+			<li><a href="#"><span class="meta">Who are we?</span><br />About</a></li>
+			<li><a href="#" class="current"><span class="meta">Homepage</span><br />Home</a></li>
+		</ul>
+		
+		<div class="hr grid_12">&nbsp;</div>
+		<div class="clear"></div>
+		
+		<!-- Featured Image Slider -->
+		<div id="featured" class="clearfix grid_12"></div>
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+			
+		<!-- Caption Line -->
+		<h2 class="grid_12 caption clearfix">Welcome! This is <a href="http://net.tutsplus.com/articles/news/free-website-template/"><span>Aurelius</span></a>, a slick, professional <u>Business</u> &amp; <u>Portfolio</u> theme built to engage the user in your work.</h2>
+		
+		<div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
+		<div id="quicknav" class="grid_12">
+			<a class="quicknavgrid_3 quicknav alpha" href="#">
+					<h4 class="title ">Recent Work</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="images/Art_Artdesigner.lv.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="#">
+					<h4 class="title ">Learn about us</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="images/info.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="#">
+					<h4 class="title ">Read our blog</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="images/Blog_Artdesigner.lv.png" /></p>
+				
+			</a>
+			<a class="quicknavgrid_3 quicknav" href="#">
+					<h4 class="title ">Follow on Twitter</h4>
+					<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
+					<p style="text-align:center;"><img alt="" src="images/hungry_bird.png" /></p>
+			</a>
+		</div>
+		<div class="hr grid_12 clearfix">&nbsp;</div>
+		<!-- Footer -->
+		<p class="grid_12 footer clearfix">
+			<span class="float"><b>&copy; Copyright</b> <a href="#">QwibbleDesigns</a> - remove upon purchase.</span>
+			<a class="float right" href="#">top</a>
+		</p>
+		
+	</div><!--end wrapper-->
+	
+	<!-- Execute the loading of Javascript at the end of the body so that content is rendered as fast as possible -->
+	<script type="text/javascript">
+	    var deferrer = jLL.staticDeferrer();
+	    // load jQuery first, because the other JS files depend on it
+    	deferrer.push('../js/jquery-1.6.1.js', function () {
+    	    // define what to execute onReady
+    	    var doOnReady = function () {
+                //attach code to DOMready event
+                $(document).ready(function() { //Start up our Featured Project Carosuel
+                    $.ajax({
+                      url: "featured.html",
+                      success: function(data){
+                        $('#featured').html(data);
+            			$('#featured ul').roundabout({
+            				easing: 'easeOutInCirc',
+            				duration: 600
+            			});
+                      }
+                    });
+                });
+    	    }
+    	    
+	        // load other JS files
+	        var asyncLoader = jLL.buildScriptDeferrer();
+	        
+	        // push a number of scripts to be loaded in order
+	        asyncLoader.push([
+                ['js/jquery.roundabout-1.0.min.js'],
+                ['js/jquery.roundabout-shapes-1.1.js'],
+                
+                // after final script is loaded attach onReady event
+                ['js/contact.js', doOnReady]
+            ]);
+            asyncLoader.run();
+	    });
+	    deferrer.runOnLoad();
+    </script>	
+</body>
+</html>

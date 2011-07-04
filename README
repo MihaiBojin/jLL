@@ -7,7 +7,7 @@ https://github.com/MihaiBojin/jLL
 Mihai Bojin <mihai.bojin@gmail.com>
 Copyright 2011, Mihai Bojin
 
-Licensed under the MIT license.
+Licensed under the MIT license. Free to use in any project!
 
 The Javascript Library Loader is a toolkit that allows asynchronous loading of 
 different Javascript libraries, plugins etc while defining an easy mechanism to
@@ -23,6 +23,17 @@ It implements two inner clases that get exposed by public methods:
 The component also has a debugging mode which output logs to the console object
 available in most modern browsers.
 Logging is disabled by default, but can be enabled by running the enableDebug() method.
+
+
+Unit tests can be found in the /tests directory of the jLL package.
+
+There are also a number of simple examples available in the examples folder.
+
+A special example (based on the free Aurelius theme provided by Nettuts) can be found
+in the /examples/aurelius directory.
+
+Many thanks to Matt Corner (the theme's creator) and Nettuts for providing it for free!
+http://net.tutsplus.com/articles/news/free-website-template/
 
 * * *
 
