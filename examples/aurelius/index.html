@@ -82,7 +82,7 @@
                 //attach code to DOMready event
                 $(document).ready(function() { //Start up our Featured Project Carosuel
                     $.ajax({
-                      url: "featured.html",
+                      url: "_featured.html",
                       success: function(data){
                         $('#featured').html(data);
             			$('#featured ul').roundabout({
